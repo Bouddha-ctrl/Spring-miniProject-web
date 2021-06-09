@@ -69,12 +69,22 @@ public class MatiereController {
 		return "MatiereDesc";
 	}
 	
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String updateNiveau(@Valid @ModelAttribute("MatiereModel") Matiere fMatiere, BindingResult bindingResult, Model model) {
+		
+
+		Matiere_services.update(fMatiere);
+		
+
+		return "redirect:/cadre/matiere/get/"+fMatiere.getIdMatiere();
+	}
+	
 	@RequestMapping(value = "/delete/{idMatiere}", method = RequestMethod.GET)
 	public String deleteMatiere(@PathVariable int idMatiere, Model model) {
 
 			Matiere m = Matiere_services.GetMatiereById(idMatiere);
 			Module mo = m.getModule();
-			mo.removeMatieres(m);
+
 			Matiere_services.deleteById(idMatiere);
 				
 			return "redirect:/cadre/module/get/"+mo.getIdModule();

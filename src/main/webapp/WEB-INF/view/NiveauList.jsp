@@ -19,9 +19,6 @@
 	
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
 	
-<style>
-		.error {color : red}
-</style>
 <title>Insert title here</title>
 </head>
 <body>
@@ -107,19 +104,7 @@
 	</div>
 	
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
-</body>
-<script>
+<script path="<%=path%>" classe="niveau" src="<c:url value="/resources/theme1/js/file1.js" />"></script>
 
-	var path = "<%=path%>"
-	var idniveau = null
-	let confirm = document.querySelector("#supprimer")
-	confirm.addEventListener('click',()=>{
-		location.replace(path+"/cadre/niveau/delete/"+idniveau)
-    })
-    
-    function GetId(id){
-		idniveau = id
-	}
-    
-</script>
+</body>
 </html>

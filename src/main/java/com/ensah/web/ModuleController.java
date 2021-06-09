@@ -49,16 +49,11 @@ public class ModuleController {
 		{
 			System.out.println("something missing!");
 			
-
 			model.addAttribute("NiveauModel",n);
-			model.addAttribute("ListModule",n.getModules());
-			
 			return "NiveauDesc";
 		}
 
-		n.addModules(fModule);
-		
-		Niveau_services.update(n);
+		Module_services.add(fModule, n);
 		
 		return "redirect:/cadre/niveau/get/"+idNiveau;
 
@@ -71,19 +66,29 @@ public class ModuleController {
 
 		model.addAttribute("ModuleModel",m);
 		model.addAttribute("Matiere_Model",new Matiere());
-		model.addAttribute("ListMatiere",m.getMatieres());
+		//model.addAttribute("ListMatiere",m.getMatieres());
+		
 		return "ModuleDesc";
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String updateNiveau(@Valid @ModelAttribute("ModuleModel") Module fModule, BindingResult bindingResult, Model model) {
+		
+
+		Module_services.update(fModule);
+		
+
+		return "redirect:/cadre/module/get/"+fModule.getIdModule();
 	}
 	
 	@RequestMapping(value = "/delete/{idModule}", method = RequestMethod.GET)
 	public String deleteModule(@PathVariable int idModule, Model model) {
 
 		Module m = Module_services.GetModuleById(idModule);
-
 		Niveau n = m.getNiveau();
-		n.removeModules(m);
+		
 		Module_services.delete(m);
-		//Niveau_services.update(n);
+		
 				
 		return "redirect:/cadre/niveau/get/"+n.getIdNiveau();
 

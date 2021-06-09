@@ -43,7 +43,9 @@
 		
 		<br/>
 		<div>
-			<h3>Le Niveau</h3>
+			<h3>Le Niveau</h3><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modiferModal" data-bs-whatever="@mdo">Modifier</button>
+
+			
 			<br/>Id Filiere: <a href="${pageContext.request.contextPath}/cadre/filiere/get/${NiveauModel.filiere.idFiliere}">${NiveauModel.filiere.idFiliere}</a>
 			<br/>Id : ${NiveauModel.idNiveau}
 			<br/>Titre  : ${NiveauModel.titre}
@@ -54,11 +56,11 @@
 		
 		<h3>Ajout d'un Module</h3>
 		<br/>
-		<f:form class="row g-3" method="POST" action="${pageContext.request.contextPath}/cadre/module/add?idniveau=${NiveauModel.idNiveau}" modelAttribute="Module_Model">
+		<f:form class="row g-3" method="POST" action="${pageContext.request.contextPath}/cadre/module/add" modelAttribute="Module_Model">
 			  
 			  <div class="col-md-4">
 			    <label  class="form-label">Id Niveau</label>
-			    <input type="text"  class="form-control" value="${NiveauModel.idNiveau}" disabled/>
+			    <f:input type="text" name="idniveau" class="form-control" value="${NiveauModel.idNiveau}" path="" readonly="true"/>
 			  </div>
 			  
 			  <div class="col-md-4">
@@ -97,7 +99,7 @@
 			
 					</tr>
 				</thead>
-				<c:forEach items="${ListModule}" var="m">
+				<c:forEach items="${NiveauModel.modules}" var="m">
 					<tr>
 						<td><c:out value="${m.idModule}" /></td>
 						<td><c:out value="${m.titre}" /></td>
@@ -118,7 +120,7 @@
 		</div>
 	</div>
 
-	<!-- Modal -->
+	<!-- Modal delete confirmation-->
 	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
@@ -136,6 +138,47 @@
 	    </div>
 	  </div>
 	</div>
+	
+	<!-- Modal Modification -->
+	<div class="modal fade" id="modiferModal" tabindex="-1" aria-labelledby="modifierModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	        <f:form name="modifyForm" id="modifyForm" onsubmit="return validateform();" action="#" class="row g-3" method="POST"  modelAttribute="NiveauModel">
+	      
+	      	   <div class="modal-body">
+			  
+				  <div class="col-md-4">
+					<label  class="form-label">Id Niveau</label>
+				    <f:input type="text" class="form-control" path="idNiveau" readonly="true"/>
+				  </div>
+				  
+				  <div class="col-md-4">
+				    <label  class="form-label">Titre</label>
+				    <f:input type="text" class="form-control" path="titre" />
+				    <f:errors path="titre" class="error"/>
+				  </div>
+				  
+				  <div class="col-md-4">
+				    <label  class="form-label">Alias</label>
+				    <f:input type="text" class="form-control" path="alias" />
+				    <f:errors path="alias" class="error"/>
+				  </div>
+					        
+				
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+		      	<button type="submit" class="btn btn-primary">Modifer</button>
+		      </div>
+		     </f:form>
+	    </div>
+	  </div>
+	</div>
+	
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
 <script path="<%=path%>" classe="module" src="<c:url value="/resources/theme1/js/file1.js" />"></script>
 

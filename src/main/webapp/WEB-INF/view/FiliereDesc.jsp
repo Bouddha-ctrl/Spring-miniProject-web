@@ -55,11 +55,11 @@
 		
 		<h3>Ajout d'un niveau</h3>
 		<br/>
-		<f:form class="row g-3" method="POST" action="${pageContext.request.contextPath}/cadre/niveau/add?idfiliere=${FiliereModel.idFiliere}" modelAttribute="Niveau_Model">
+		<f:form class="row g-3" method="POST" action="${pageContext.request.contextPath}/cadre/niveau/add" modelAttribute="Niveau_Model">
 			  
 			  <div class="col-md-4">
-			    <label  class="form-label">Id filiere</label>
-			    <input type="text" name="idfiliere" class="form-control" value="${FiliereModel.idFiliere}" disabled/>
+			    <label  class="form-label">Id Filiere</label>
+			    <f:input type="text" name="idfiliere" class="form-control" path="" value="${FiliereModel.idFiliere}" readonly="true"/>
 			  </div>
 			  
 			  <div class="col-md-4">
@@ -78,7 +78,7 @@
 			  <div class="col-12">
 			    <button class="btn btn-primary" type="submit">Ajouter</button>
 			  </div>
-			</f:form>
+		</f:form>
 		<br/>
 		<div>
 			<h3>Liste des niveaux</h3>
@@ -96,7 +96,7 @@
 			
 					</tr>
 				</thead>
-				<c:forEach items="${ListNiveau}" var="n">
+				<c:forEach items="${FiliereModel.niveaux}" var="n">
 					<tr>
 						<td><c:out value="${n.idNiveau}" /></td>
 						<td><c:out value="${n.alias}" /></td>

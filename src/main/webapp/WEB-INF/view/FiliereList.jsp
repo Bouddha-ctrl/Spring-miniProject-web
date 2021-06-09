@@ -40,7 +40,9 @@
 		  <li class="nav-item">
 		    <a class="nav-link" href="${pageContext.request.contextPath}/cadre/matiere/list">Matiere</a>
 		  </li>
-		  
+		  <li class="nav-item">
+		    <a class="nav-link" href="${pageContext.request.contextPath}/cadre/pedagogie/tree">Tree</a>
+		  </li>
 		</ul>
 
 
@@ -50,11 +52,6 @@
 		</div>
 
         <f:form class="row g-3" method="POST" action="${pageContext.request.contextPath}/cadre/filiere/add" modelAttribute="Filiere_model">
-			  <div class="col-md-4">
-			    <label  class="form-label">Id</label>
-			    <f:input path="idFiliere" class="form-control"/>
-				<f:errors path="idFiliere" class="error"/>
-			  </div>
 			  
 			  <div class="col-md-4">
 			    <label  class="form-label">Titre</label>
@@ -79,7 +76,9 @@
 			    <f:input class="form-control" path="anneeFinaccreditation" />
 			     <f:errors path="anneeFinaccreditation" class="error"/>
 			  </div>
-			  	
+			  
+			  
+			  
 			  <div class="col-12">
 			    <button class="btn btn-primary" type="submit">Ajouter</button>
 			  </div>

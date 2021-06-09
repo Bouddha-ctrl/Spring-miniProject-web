@@ -104,19 +104,7 @@
 	</div>
 	
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
-</body>
-<script>
+<script path="<%=path%>" classe="module" src="<c:url value="/resources/theme1/js/file1.js" />"></script>
 
-	var path = "<%=path%>"
-	var idmodule = null
-	let confirm = document.querySelector("#supprimer")
-	confirm.addEventListener('click',()=>{
-		location.replace(path+"/cadre/module/delete/"+idmodule)
-    })
-    
-    function GetId(id){
-		idmodule = id
-	}
-    
-</script>
+</body>
 </html>

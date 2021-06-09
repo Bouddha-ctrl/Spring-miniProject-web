@@ -44,6 +44,7 @@
 		<br/>
 		<div>
 			<h3>Le Module</h3>
+			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modiferModal" data-bs-whatever="@mdo">Modifier</button>
 			<br/>Id Niveau: <a href="${pageContext.request.contextPath}/cadre/niveau/get/${ModuleModel.niveau.idNiveau}">${ModuleModel.niveau.idNiveau}</a>
 			<br/>Id Module: ${ModuleModel.idModule}
 			<br/>Titre  : ${ModuleModel.titre}
@@ -54,11 +55,11 @@
 		
 		<h3>Ajout d'une Matiere</h3>
 		<br/>
-		<f:form class="row g-3" method="POST" action="${pageContext.request.contextPath}/cadre/matiere/add?idmodule=${ModuleModel.idModule}" modelAttribute="Matiere_Model">
+		<f:form class="row g-3" method="POST" action="${pageContext.request.contextPath}/cadre/matiere/add" modelAttribute="Matiere_Model">
 			  
 			  <div class="col-md-4">
 			    <label  class="form-label">Id Module</label>
-			    <input type="text"  class="form-control" value="${ModuleModel.idModule}" disabled/>
+			    <f:input type="text"  class="form-control" path="" name="idmodule" value="${ModuleModel.idModule}" readonly="true"/>
 			  </div>
 			  
 			  <div class="col-md-4">
@@ -97,7 +98,7 @@
 			
 					</tr>
 				</thead>
-				<c:forEach items="${ListMatiere}" var="m">
+				<c:forEach items="${ModuleModel.matieres}" var="m">
 					<tr>
 						<td><c:out value="${m.idMatiere}" /></td>
 						<td><c:out value="${m.nom}" /></td>
@@ -136,6 +137,47 @@
 	    </div>
 	  </div>
 	</div>
+	
+	<!-- Modal Modification -->
+	<div class="modal fade" id="modiferModal" tabindex="-1" aria-labelledby="modifierModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	        <f:form class="row g-3" method="POST" action="${pageContext.request.contextPath}/cadre/module/update" modelAttribute="ModuleModel">
+	      
+	      	   <div class="modal-body">
+			  
+				  <div class="col-md-4">
+					<label  class="form-label">Id Module</label>
+				    <f:input type="text" class="form-control" path="idModule" readonly="true"/>
+				  </div>
+				  
+				  <div class="col-md-4">
+				    <label  class="form-label">Titre</label>
+				    <f:input type="text" class="form-control" path="titre" />
+				    <f:errors path="titre" class="error"/>
+				  </div>
+				  
+				  <div class="col-md-4">
+				    <label  class="form-label">code</label>
+				    <f:input type="text" class="form-control" path="code" />
+				    <f:errors path="code" class="error"/>
+				  </div>
+					        
+				
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+		      	<button type="submit" class="btn btn-primary" >Modifer</button>
+		      </div>
+		     </f:form>
+	    </div>
+	  </div>
+	</div>
+	
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
 <script path="<%=path%>" classe="matiere" src="<c:url value="/resources/theme1/js/file1.js" />"></script>
 

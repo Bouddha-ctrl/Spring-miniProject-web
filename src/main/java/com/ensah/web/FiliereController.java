@@ -54,18 +54,17 @@ public class FiliereController {
 	}
 	
 	@RequestMapping(value = "/get/{idFiliere}", method = RequestMethod.GET)
-	public String getFiliere(@PathVariable String idFiliere, Model model) {
+	public String getFiliere(@PathVariable int idFiliere, Model model) {
 		
 		Filiere f = Filiere_services.GetFiliereById(idFiliere);
-
-		model.addAttribute("FiliereModel",f);
-		model.addAttribute("Niveau_Model",new Niveau());
-		model.addAttribute("ListNiveau",f.getNiveaux());
+       
+		model.addAttribute("FiliereModel",f);   //info filiere
+		model.addAttribute("Niveau_Model",new Niveau());//niveau a ajouter
 		return "FiliereDesc";
 	}
 	
 	@RequestMapping(value = "/delete/{idFiliere}", method = RequestMethod.GET)
-	public String deleteFiliere(@PathVariable String idFiliere, Model model) {
+	public String deleteFiliere(@PathVariable int idFiliere, Model model) {
 
 		Filiere_services.deleteById(idFiliere);
 				

@@ -42,24 +42,19 @@ public class NiveauController {
 	
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addNiveau(@Valid @ModelAttribute("Niveau_Model") Niveau fNiveau, BindingResult bindingResult,@RequestParam("idfiliere") String idFiliere, Model model) {
+	public String addNiveau(@Valid @ModelAttribute("Niveau_Model") Niveau fNiveau, BindingResult bindingResult,@RequestParam("idfiliere") int idFiliere, Model model) {
 		
+		Filiere f = Filiere_services.GetFiliereById(idFiliere);
+
 		if (bindingResult.hasErrors()) 
 		{
 			System.out.println("something missing!");
 
-			Filiere f = Filiere_services.GetFiliereById(idFiliere);
 			model.addAttribute("FiliereModel",f);
-			model.addAttribute("ListNiveau",f.getNiveaux());
 			return "FiliereDesc";
 		}
 		
-		Filiere f = Filiere_services.GetFiliereById(idFiliere);
-		f.addNiveaux(fNiveau);
-		
-		Filiere_services.update(f);
-		
-		//Niveau_services.add(fNiveau);
+		Niveau_services.add(fNiveau,f);
 		
 		return "redirect:/cadre/filiere/get/"+idFiliere;
 	}
@@ -71,10 +66,20 @@ public class NiveauController {
 		
 		Niveau n = Niveau_services.GetNiveauById(idNiveau);
 
-		model.addAttribute("Module_Model",new Module());
-		model.addAttribute("NiveauModel",n);
-		model.addAttribute("ListModule",n.getModules());
+		model.addAttribute("Module_Model",new Module());  //model pour nouveau module
+		model.addAttribute("NiveauModel",n);    //info niveau
+
 		return "NiveauDesc";
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String updateNiveau(@Valid @ModelAttribute("NiveauModel") Niveau fNiveau, BindingResult bindingResult, Model model) {
+		
+
+		Niveau_services.update(fNiveau);
+		
+
+		return "redirect:/cadre/niveau/get/"+fNiveau.getIdNiveau();
 	}
 	
 	
@@ -82,9 +87,8 @@ public class NiveauController {
 	public String deleteNiveau(@PathVariable int idNiveau, Model model) {
 		
 		Niveau n = Niveau_services.GetNiveauById(idNiveau);
-
 		Filiere f = n.getFiliere();
-		f.removeNiveaux(n);
+		
 		Niveau_services.delete(n);
 				
 		return "redirect:/cadre/filiere/get/"+f.getIdFiliere();

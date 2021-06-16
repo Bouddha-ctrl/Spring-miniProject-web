@@ -66,19 +66,32 @@ public class NiveauController {
 		
 		Niveau n = Niveau_services.GetNiveauById(idNiveau);
 
-		model.addAttribute("Module_Model",new Module());  //model pour nouveau module
-		model.addAttribute("NiveauModel",n);    //info niveau
+		model.addAttribute("Module_Model",new Module());  //Model for new Module
+		model.addAttribute("NiveauModel",n);    //info Niveau
+		model.addAttribute("UpdateNiveauModel",n); //info Niveau to update
+		model.addAttribute("checkModal",0); //show update model or not   1/0
 
 		return "NiveauDesc";
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String updateNiveau(@Valid @ModelAttribute("NiveauModel") Niveau fNiveau, BindingResult bindingResult, Model model) {
+	public String updateNiveau(@Valid @ModelAttribute("UpdateNiveauModel") Niveau fNiveau, BindingResult bindingResult, Model model) {
 		
-
+		
+		if (bindingResult.hasErrors()) 
+		{
+			System.out.println("something missing!");
+			
+			Niveau n = Niveau_services.GetNiveauById(fNiveau.getIdNiveau());
+			model.addAttribute("Module_Model",new Module());  //model pour nouveau module
+			model.addAttribute("NiveauModel",n); //info Niveau
+			model.addAttribute("checkModal",1);//show update model or not   1/0
+			return "NiveauDesc";
+		}
+		
+		
 		Niveau_services.update(fNiveau);
 		
-
 		return "redirect:/cadre/niveau/get/"+fNiveau.getIdNiveau();
 	}
 	

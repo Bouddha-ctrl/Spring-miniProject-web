@@ -43,16 +43,18 @@
 		
 		<br/>
 		<div>
-			<h3>Le Niveau</h3><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modiferModal" data-bs-whatever="@mdo">Modifier</button>
-
-			
-			<br/>Id Filiere: <a href="${pageContext.request.contextPath}/cadre/filiere/get/${NiveauModel.filiere.idFiliere}">${NiveauModel.filiere.idFiliere}</a>
-			<br/>Id : ${NiveauModel.idNiveau}
-			<br/>Titre  : ${NiveauModel.titre}
-			<br/>Alias : ${NiveauModel.alias}
+			<h3>Le Niveau</h3>
+			<table>
+			 <tr><td>Id Filiere </td> <td> : <a href="${pageContext.request.contextPath}/cadre/filiere/get/${NiveauModel.filiere.idFiliere}">${NiveauModel.filiere.idFiliere}</a></td></tr>  
+			 <tr><td>Id Niveau </td> <td>: ${NiveauModel.idNiveau}</td></tr>
+			 <tr><td>Titre  </td><td> : ${NiveauModel.titre}</td></tr>
+			 <tr><td>Alias </td><td> : ${NiveauModel.alias}</td></tr>
+			</table>
 		</div>
+		<button id="modify" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modiferModal" data-bs-whatever="@mdo">Modifier</button>
 		
-		<br/>
+		
+		<br/><br/>
 		
 		<h3>Ajout d'un Module</h3>
 		<br/>
@@ -72,7 +74,7 @@
 			  <div class="col-md-4">
 			    <label  class="form-label">code</label>
 			    <f:input type="text" class="form-control" path="code" />
-			    <f:errors path="code" class="error"/>
+				<f:errors path="code" class="error"/>
 			  </div>
 			
 			  	
@@ -140,14 +142,14 @@
 	</div>
 	
 	<!-- Modal Modification -->
-	<div class="modal fade" id="modiferModal" tabindex="-1" aria-labelledby="modifierModalLabel" aria-hidden="true">
+	<div class="modal" id="modiferModal" tabindex="-1" aria-labelledby="modifierModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
-	        <f:form name="modifyForm" id="modifyForm" onsubmit="return validateform();" action="#" class="row g-3" method="POST"  modelAttribute="NiveauModel">
+	        <f:form name="modifyForm" id="modifyForm"  action="${pageContext.request.contextPath}/cadre/niveau/update" class="row g-3" method="POST"  modelAttribute="UpdateNiveauModel">
 	      
 	      	   <div class="modal-body">
 			  
@@ -168,17 +170,18 @@
 				    <f:errors path="alias" class="error"/>
 				  </div>
 					        
+				<p id="demo"></p>
 				
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-		      	<button type="submit" class="btn btn-primary">Modifer</button>
+		      	<button  type="submit" class="btn btn-primary">Modifer</button>
 		      </div>
 		     </f:form>
 	    </div>
 	  </div>
 	</div>
-	
+<input id="checkModal" value="${checkModal}"  hidden="true"/>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
 <script path="<%=path%>" classe="module" src="<c:url value="/resources/theme1/js/file1.js" />"></script>
 

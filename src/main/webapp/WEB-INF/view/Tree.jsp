@@ -65,6 +65,12 @@
 				</c:forEach>
 
 			</table>
+			
+			<form name="fileUpload" method="POST" action="${pageContext.request.contextPath}/cadre/uploadFile" enctype="multipart/form-data">
+				 <label>Select File</label> <br />
+				 <input type="file" name="file" />
+				 <input type="submit" name="submit" value="Upload" />
+			</form>
 	</div>
 </body>
 </html>

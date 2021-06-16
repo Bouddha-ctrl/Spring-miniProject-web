@@ -64,17 +64,28 @@ public class ModuleController {
 		
 		Module m = Module_services.GetModuleById(idModule);
 
-		model.addAttribute("ModuleModel",m);
-		model.addAttribute("Matiere_Model",new Matiere());
-		//model.addAttribute("ListMatiere",m.getMatieres());
-		
+		model.addAttribute("Matiere_Model",new Matiere()); // Model for new Matiere
+		model.addAttribute("ModuleModel",m); //info Module
+		model.addAttribute("UpdateModuleModel",m); //info Module to update
+		model.addAttribute("checkModal",0); //show update model or not   1/0
+
 		return "ModuleDesc";
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String updateNiveau(@Valid @ModelAttribute("ModuleModel") Module fModule, BindingResult bindingResult, Model model) {
+	public String updateNiveau(@Valid @ModelAttribute("UpdateModuleModel") Module fModule, BindingResult bindingResult, Model model) {
 		
+		if (bindingResult.hasErrors()) 
+		{
+			System.out.println("something missing!");
 
+			Module m = Module_services.GetModuleById(fModule.getIdModule());
+			model.addAttribute("Matiere_Model",new Matiere()); // Model for new Matiere
+			model.addAttribute("ModuleModel",m); //info Module
+			model.addAttribute("checkModal",1); //show update model or not   1/0
+			return "ModuleDesc";
+		}
+		
 		Module_services.update(fModule);
 		
 

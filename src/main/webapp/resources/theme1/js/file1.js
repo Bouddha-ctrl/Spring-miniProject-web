@@ -19,23 +19,21 @@
 	}
 	
 	
+	try {
 	
-	function validateform()
+	var check = document.getElementById("checkModal").value;
+	
+	console.log(check);
+	var modify = document.querySelector("#modify")
+	if (check==1)
 	{
-		console.log("vide");
-		var titre = document.modifyForm.titre.value;
-		var alias = document.modifyForm.alias.value;
-		
-		console.log(titre);
-		console.log(alias);
-		
-		
-		if (titre == null || titre == "")
-		{
-			console.log("titre vide");
-		}
-		
-		
-		return false;
+		document.getElementById("modiferModal").className = "modal";
+		modify.click()
+	}else{
+		document.getElementById("modiferModal").className = "modal fade";
+
+	}
+
+	} catch (error) {
 	
 	}

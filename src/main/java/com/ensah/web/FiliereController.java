@@ -58,9 +58,31 @@ public class FiliereController {
 		
 		Filiere f = Filiere_services.GetFiliereById(idFiliere);
        
-		model.addAttribute("FiliereModel",f);   //info filiere
-		model.addAttribute("Niveau_Model",new Niveau());//niveau a ajouter
+		model.addAttribute("Niveau_Model",new Niveau());//Model for new Niveau
+		model.addAttribute("FiliereModel",f);   //info Filiere
+		model.addAttribute("UpdateFiliereModel",f); //info Niveau to update
+		model.addAttribute("checkModal",0); //show update model or not   1/0
 		return "FiliereDesc";
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String updateNiveau(@Valid @ModelAttribute("UpdateFiliereModel") Filiere fFiliere, BindingResult bindingResult, Model model) {
+		
+		System.out.println("checking");
+		if (bindingResult.hasErrors()) 
+		{
+			System.out.println("something missing!");
+			
+			Filiere f = Filiere_services.GetFiliereById(fFiliere.getIdFiliere());
+			model.addAttribute("Niveau_Model",new Niveau());//Model for new Niveau
+			model.addAttribute("FiliereModel",f);   //info Filiere
+			model.addAttribute("checkModal",1); //show update model or not   1/0
+			return "FiliereDesc";
+		}
+		
+		Filiere_services.update(fFiliere);
+		
+		return "redirect:/cadre/filiere/get/"+fFiliere.getIdFiliere();
 	}
 	
 	@RequestMapping(value = "/delete/{idFiliere}", method = RequestMethod.GET)

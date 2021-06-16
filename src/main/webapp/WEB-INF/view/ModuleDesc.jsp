@@ -44,14 +44,16 @@
 		<br/>
 		<div>
 			<h3>Le Module</h3>
-			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modiferModal" data-bs-whatever="@mdo">Modifier</button>
-			<br/>Id Niveau: <a href="${pageContext.request.contextPath}/cadre/niveau/get/${ModuleModel.niveau.idNiveau}">${ModuleModel.niveau.idNiveau}</a>
-			<br/>Id Module: ${ModuleModel.idModule}
-			<br/>Titre  : ${ModuleModel.titre}
-			<br/>code : ${ModuleModel.code}
+			<table>
+			 <tr><td>Id Niveau  </td><td> : <a href="${pageContext.request.contextPath}/cadre/niveau/get/${ModuleModel.niveau.idNiveau}">${ModuleModel.niveau.idNiveau}</a></td></tr>
+			 <tr><td>Id Module  </td><td> : ${ModuleModel.idModule}</td></tr>
+			 <tr><td>Titre   </td><td> : ${ModuleModel.titre}</td></tr>
+			 <tr><td>Code  </td><td> : ${ModuleModel.code}</td></tr>
+			</table>
 		</div>
+		<button id="modify"  type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modiferModal" data-bs-whatever="@mdo">Modifier</button>
 		
-		<br/>
+		<br/><br/>
 		
 		<h3>Ajout d'une Matiere</h3>
 		<br/>
@@ -146,7 +148,7 @@
 	        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
-	        <f:form class="row g-3" method="POST" action="${pageContext.request.contextPath}/cadre/module/update" modelAttribute="ModuleModel">
+	        <f:form class="row g-3" method="POST" action="${pageContext.request.contextPath}/cadre/module/update" modelAttribute="UpdateModuleModel">
 	      
 	      	   <div class="modal-body">
 			  
@@ -177,7 +179,8 @@
 	    </div>
 	  </div>
 	</div>
-	
+
+<input id="checkModal" value="${checkModal}"  hidden="true"/>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
 <script path="<%=path%>" classe="matiere" src="<c:url value="/resources/theme1/js/file1.js" />"></script>
 

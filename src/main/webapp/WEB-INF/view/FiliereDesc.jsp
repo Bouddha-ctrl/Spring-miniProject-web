@@ -42,16 +42,18 @@
 		
 		<br/>
 		<div>
-			<h3>La filiere</h3>
-			
-			<br/>Id : ${FiliereModel.idFiliere}
-			<br/>Titre  : ${FiliereModel.titreFiliere}
-			<br/>Code : ${FiliereModel.codeFiliere}
-			<br/>Annee d'accreditation : ${FiliereModel.anneeaccreditation}
-			<br/>Annee fin d'accreditation : ${FiliereModel.anneeFinaccreditation}
+			<h3>La filiere</h3>			
+			<table>
+			 <tr><td>Id </td><td> : ${FiliereModel.idFiliere}</td></tr>
+			 <tr><td>Titre </td><td> : ${FiliereModel.titreFiliere}</td></tr>
+			 <tr><td>Code </td><td> : ${FiliereModel.codeFiliere}</td></tr>
+			 <tr><td>Annee d'accreditation </td><td> : ${FiliereModel.anneeaccreditation}</td></tr>
+			 <tr><td>Annee fin d'accreditation </td><td> : ${FiliereModel.anneeFinaccreditation}</td></tr>
+			</table>
 		</div>
+			<button id="modify" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modiferModal" data-bs-whatever="@fat">Modifier</button>
 		
-		<br/>
+		<br/><br/>
 		
 		<h3>Ajout d'un niveau</h3>
 		<br/>
@@ -136,6 +138,61 @@
 	    </div>
 	  </div>
 	</div>
+	
+	<!-- Modal Modification -->
+	<div class="modal" id="modiferModal" tabindex="-1" aria-labelledby="modifierModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	        <f:form name="modifyForm" id="modifyForm"  action="${pageContext.request.contextPath}/cadre/filiere/update" class="row g-3" method="POST"  modelAttribute="UpdateFiliereModel">
+	      
+	      	   <div class="modal-body">
+			  
+				  <div class="col-md-6">
+					<label  class="form-label">Id Filiere</label>
+				    <f:input type="text" class="form-control" path="idFiliere" readonly="true"/>
+				  </div>
+				  
+				  <div class="col-md-6">
+				    <label  class="form-label">Titre</label>
+				    <f:input type="text" class="form-control" path="titreFiliere" />
+				    <f:errors path="titreFiliere" class="error"/>
+				  </div>
+				  
+				  <div class="col-md-6">
+				    <label  class="form-label">Code</label>
+				    <f:input type="text" class="form-control" path="codeFiliere" />
+				    <f:errors path="codeFiliere" class="error"/>
+				  </div>
+					        
+				  <div class="col-md-6">
+				    <label  class="form-label">Annee d'accreditation</label>
+				    <f:input type="text" class="form-control" path="anneeaccreditation" />
+				    <f:errors path="anneeaccreditation" class="error"/>
+				  </div>		
+				  
+				  <div class="col-md-6">
+				    <label  class="form-label">Annee fin d'accreditation</label>
+				    <f:input type="text" class="form-control" path="anneeFinaccreditation" />
+				    <f:errors path="anneeFinaccreditation" class="error"/>
+				  </div>
+				  		
+				  
+		      </div>
+		      
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+		      	<button  type="submit" class="btn btn-primary">Modifer</button>
+		      </div>
+		     </f:form>
+	    </div>
+	  </div>
+	</div>
+	
+<input id="checkModal" value="${checkModal}"  hidden="true"/>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
 <script path="<%=path%>" classe="niveau" src="<c:url value="/resources/theme1/js/file1.js" />"></script>
 

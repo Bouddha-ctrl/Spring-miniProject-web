@@ -13,12 +13,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<!-- Bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" 
 	rel="stylesheet" 
 	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" 
 	crossorigin="anonymous"/>
+<!-- Bootstrap -->
 
+<!-- local css -->
 <link type="text/css" rel="stylesheet" href="<c:url value="/resources/theme1/css/style.css" />" />
+<!-- local css -->
 
 </head>
 <body>
@@ -43,7 +48,10 @@
 		
 		<br/>
 		<div>
-			<h3>Le Niveau</h3>
+			<h3>
+			 	Le Niveau
+				<button id="modify" type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modiferModal" data-bs-whatever="@mdo">Modifier</button>
+			</h3>
 			<table>
 			 <tr><td>Id Filiere </td> <td> : <a href="${pageContext.request.contextPath}/cadre/filiere/get/${NiveauModel.filiere.idFiliere}">${NiveauModel.filiere.idFiliere}</a></td></tr>  
 			 <tr><td>Id Niveau </td> <td>: ${NiveauModel.idNiveau}</td></tr>
@@ -51,15 +59,13 @@
 			 <tr><td>Alias </td><td> : ${NiveauModel.alias}</td></tr>
 			</table>
 		</div>
-		<button id="modify" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modiferModal" data-bs-whatever="@mdo">Modifier</button>
 		
-		
-		<br/><br/>
+		<hr class="line1">
+
 		
 		<h3>Ajout d'un Module</h3>
-		<br/>
-		<f:form class="row g-3" method="POST" action="${pageContext.request.contextPath}/cadre/module/add" modelAttribute="Module_Model">
-			  
+		
+		<f:form id="form" class="row g-3" method="POST" action="${pageContext.request.contextPath}/cadre/module/add" modelAttribute="Module_Model">
 			  <div class="col-md-4">
 			    <label  class="form-label">Id Niveau</label>
 			    <f:input type="text" name="idniveau" class="form-control" value="${NiveauModel.idNiveau}" path="" readonly="true"/>
@@ -82,7 +88,8 @@
 			    <button class="btn btn-primary" type="submit">Ajouter</button>
 			  </div>
 			</f:form>
-		<br/>
+
+		<hr class="dotedline">
 		
 		<div>
 			<h3>Liste des Modules</h3>
@@ -110,7 +117,7 @@
 						<td>
 							<ul>
 								<li><a href="${pageContext.request.contextPath}/cadre/module/get/${m.idModule}">Plus d'information</a></li>
-								<li data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="GetId(id)" id="${m.idModule}"><a href="#">Supprimer</a></li>
+								<li data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="GetId(id,`module`)" id="${m.idModule}"><a href="#">Supprimer</a></li>
 							</ul>
 						</td>
 
@@ -169,7 +176,7 @@
 				    <f:input type="text" class="form-control" path="alias" />
 				    <f:errors path="alias" class="error"/>
 				  </div>
-					        
+				  
 				<p id="demo"></p>
 				
 		      </div>
@@ -183,7 +190,7 @@
 	</div>
 <input id="checkModal" value="${checkModal}"  hidden="true"/>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
-<script path="<%=path%>" classe="module" src="<c:url value="/resources/theme1/js/file1.js" />"></script>
+<script path="<%=path%>"  src="<c:url value="/resources/theme1/js/file1.js" />"></script>
 
 </body>
 </html>

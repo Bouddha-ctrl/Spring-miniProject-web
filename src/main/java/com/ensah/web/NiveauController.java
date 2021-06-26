@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ensah.core.metier.Module;
+import com.ensah.core.metier.Coordination;
 import com.ensah.core.metier.Filiere;
 
 import com.ensah.core.metier.Niveau;
+import com.ensah.core.model.CoordinationModel;
 import com.ensah.core.service.Interface.IFiliereService;
 import com.ensah.core.service.Interface.INiveauService;
 
@@ -31,15 +33,21 @@ public class NiveauController {
 	@Autowired
 	private IFiliereService Filiere_services;
 	
-	@RequestMapping("/list")
-	public String FiliereList(Model model) {
-		
-		
-		model.addAttribute("ListNiveau", Niveau_services.getAllNiveau());
+	@RequestMapping(value="/list")
+	public String NiveauList(@RequestParam(required = false,name="search") String searchParam, Model model) {
 
+		if (searchParam != null && !searchParam.isEmpty())
+		{
+			model.addAttribute("ListNiveau",Niveau_services.getSearch(searchParam));
+		}
+		else
+		{
+		model.addAttribute("ListNiveau", Niveau_services.getAllNiveau());
+		}
 		return "NiveauList";
 	}
-	
+
+
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addNiveau(@Valid @ModelAttribute("Niveau_Model") Niveau fNiveau, BindingResult bindingResult,@RequestParam("idfiliere") int idFiliere, Model model) {
@@ -50,7 +58,10 @@ public class NiveauController {
 		{
 			System.out.println("something missing!");
 
-			model.addAttribute("FiliereModel",f);
+			model.addAttribute("Coordination_Model",new CoordinationModel());//Model for new coordination
+			model.addAttribute("FiliereModel",f);   //info Filiere
+			model.addAttribute("checkModal",0); //show update model or not   1/0
+			model.addAttribute("UpdateFiliereModel",f); //info Filiere to update
 			return "FiliereDesc";
 		}
 		
@@ -81,7 +92,7 @@ public class NiveauController {
 		if (bindingResult.hasErrors()) 
 		{
 			System.out.println("something missing!");
-			
+			System.out.println(bindingResult.getFieldError());
 			Niveau n = Niveau_services.GetNiveauById(fNiveau.getIdNiveau());
 			model.addAttribute("Module_Model",new Module());  //model pour nouveau module
 			model.addAttribute("NiveauModel",n); //info Niveau

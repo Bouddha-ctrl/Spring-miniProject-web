@@ -48,12 +48,6 @@ public class GlobalController {
 	@RequestMapping(value = "/a")
 	public String a(Model  model) {
 		
-		int idFiliere = 3;
-		int idEnseignant = 1;
-		
-		Coordination d = new Coordination();d.setDateDebut(new Date());d.setDateFin(new Date());
-		
-		Coordination_services.add(d,idFiliere,idEnseignant);
 		
 		return null;
 	}

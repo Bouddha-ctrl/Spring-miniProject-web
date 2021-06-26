@@ -45,8 +45,25 @@
 			<h3>Liste des matieres</h3>
 		</div>
 
-		<div>
+		<div class="row g-3 align-items-center">
+		  <div class="col-auto">
+		    <label for="SearchSelect" class="col-form-label">Recherche par</label>
+		  </div>
+		  <div class="col-auto">
+				<select class="form-select form-select-sm" onchange="getSearchValue()" id="SearchSelect" >
+					<option  value="idMatiere" >Id Matiere</option>
+					<option  value="code">Code</option>
+					<option  value="nom">Nom de la matiere</option>
+				</select> 
+		  </div>
+		  <div class="col-auto"> : </div>
+		  <div class="col-auto">
+		  		 <input type="text" id="SearchInput" onchange="getSearchValue()" class="form-control form-control-sm" />
+		  </div>
+		</div>
 
+
+		<div>
 			<table class="table">
 				<thead>
 					<tr>
@@ -68,7 +85,7 @@
 						<td>
 							<ul>
 								<li><a  href="${pageContext.request.contextPath}/cadre/matiere/get/${m.idMatiere}">Plus d'information</a></li>
-								<li data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="GetId(id)" id="${m.idMatiere}"><a href="#">Supprimer</a></li>
+								<li data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="GetId(id,`matiere`)" id="${m.idMatiere}"><a href="#">Supprimer</a></li>
 
 							</ul>
 						</td>
@@ -102,7 +119,7 @@
 	</div>
 	
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
-<script path="<%=path%>" classe="matiere" src="<c:url value="/resources/theme1/js/file1.js" />"></script>
+<script path="<%=path%>"  src="<c:url value="/resources/theme1/js/file1.js" />"></script>
 
 </body>
 </html>

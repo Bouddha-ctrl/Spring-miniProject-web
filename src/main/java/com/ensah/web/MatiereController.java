@@ -29,10 +29,16 @@ public class MatiereController {
 	
 	
 	@RequestMapping("/list")
-	public String MatiereList(Model model) {
+	public String MatiereList(@RequestParam(required = false,name="search") String searchParam, Model model) {
 		
-		
+		if (searchParam != null && !searchParam.isEmpty())
+		{
+			model.addAttribute("ListMatiere",Matiere_services.getSearch(searchParam));
+		}
+		else
+		{
 		model.addAttribute("ListMatiere", Matiere_services.getAllMatiere());
+		}
 
 		return "MatiereList";
 	}
@@ -65,14 +71,26 @@ public class MatiereController {
 
 		Matiere m = Matiere_services.GetMatiereById(idMatiere);
 		
-		model.addAttribute("MatiereModel",m);
+		model.addAttribute("MatiereModel",m);//info Matiere
+		model.addAttribute("UpdateMatiereModel",m); //info Matiere to update
+		model.addAttribute("checkModal",0); //show update model or not   1/0
+		
 		return "MatiereDesc";
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String updateNiveau(@Valid @ModelAttribute("MatiereModel") Matiere fMatiere, BindingResult bindingResult, Model model) {
+	public String updateMatiere(@Valid @ModelAttribute("UpdateMatiereModel") Matiere fMatiere, BindingResult bindingResult, Model model) {
 		
+		if (bindingResult.hasErrors()) 
+		{
+			System.out.println("something missing!");
+			
+			Matiere m = Matiere_services.GetMatiereById(fMatiere.getIdMatiere());
+			model.addAttribute("MatiereModel",m);//info Matiere
+			model.addAttribute("checkModal",1); //show update model or not   1/0
 
+			return "MatiereDesc";
+		}
 		Matiere_services.update(fMatiere);
 		
 

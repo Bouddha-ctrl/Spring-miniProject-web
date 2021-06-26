@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ensah.core.metier.Coordination;
 import com.ensah.core.metier.Filiere;
 import com.ensah.core.metier.Niveau;
+import com.ensah.core.model.CoordinationModel;
 import com.ensah.core.service.Interface.IFiliereService;
 
 @Controller
@@ -26,12 +29,18 @@ public class FiliereController {
 	
 	
 	@RequestMapping("/list")
-	public String FiliereList(Model model) {
+	public String FiliereList(@RequestParam(required = false,name="search") String searchParam, Model model) {
+		model.addAttribute("Filiere_model",new Filiere()); //add filiere form
 		
-		
+		if (searchParam != null && !searchParam.isEmpty())
+		{
+			model.addAttribute("ListFiliere",Filiere_services.getSearch(searchParam));
+		}
+		else
+		{
 		model.addAttribute("ListFiliere", Filiere_services.getAllFiliere());
-		model.addAttribute("Filiere_model",new Filiere());
-
+		}
+		
 		return "FiliereList";
 	}
 	
@@ -58,10 +67,14 @@ public class FiliereController {
 		
 		Filiere f = Filiere_services.GetFiliereById(idFiliere);
        
+		model.addAttribute("Coordination_Model",new CoordinationModel());
+		
 		model.addAttribute("Niveau_Model",new Niveau());//Model for new Niveau
+		
 		model.addAttribute("FiliereModel",f);   //info Filiere
-		model.addAttribute("UpdateFiliereModel",f); //info Niveau to update
-		model.addAttribute("checkModal",0); //show update model or not   1/0
+		
+		model.addAttribute("UpdateFiliereModel",f); //info Filiere to update
+		model.addAttribute("checkModal",0); //show update modal or not   1/0
 		return "FiliereDesc";
 	}
 	
@@ -74,7 +87,9 @@ public class FiliereController {
 			System.out.println("something missing!");
 			
 			Filiere f = Filiere_services.GetFiliereById(fFiliere.getIdFiliere());
+			
 			model.addAttribute("Niveau_Model",new Niveau());//Model for new Niveau
+			model.addAttribute("Coordination_Model",new CoordinationModel());//Model for new coordination
 			model.addAttribute("FiliereModel",f);   //info Filiere
 			model.addAttribute("checkModal",1); //show update model or not   1/0
 			return "FiliereDesc";

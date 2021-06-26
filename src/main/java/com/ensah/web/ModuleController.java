@@ -32,11 +32,16 @@ public class ModuleController {
 	
 	
 	@RequestMapping("/list")
-	public String ModuleList(Model model) {
+	public String ModuleList(@RequestParam(required = false,name="search") String searchParam, Model model) {
 		
-		
+		if (searchParam != null && !searchParam.isEmpty())
+		{
+			model.addAttribute("ListModule",Module_services.getSearch(searchParam));
+		}
+		else
+		{
 		model.addAttribute("ListModule", Module_services.getAllModule());
-
+		}
 		return "ModuleList";
 	}
 	
@@ -73,7 +78,7 @@ public class ModuleController {
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String updateNiveau(@Valid @ModelAttribute("UpdateModuleModel") Module fModule, BindingResult bindingResult, Model model) {
+	public String updateModule(@Valid @ModelAttribute("UpdateModuleModel") Module fModule, BindingResult bindingResult, Model model) {
 		
 		if (bindingResult.hasErrors()) 
 		{

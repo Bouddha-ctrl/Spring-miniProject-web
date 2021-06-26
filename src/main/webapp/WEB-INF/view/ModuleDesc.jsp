@@ -43,7 +43,10 @@
 		
 		<br/>
 		<div>
-			<h3>Le Module</h3>
+			<h3>
+				Le Module
+				<button id="modify"  type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modiferModal" data-bs-whatever="@mdo">Modifier</button>
+			</h3>
 			<table>
 			 <tr><td>Id Niveau  </td><td> : <a href="${pageContext.request.contextPath}/cadre/niveau/get/${ModuleModel.niveau.idNiveau}">${ModuleModel.niveau.idNiveau}</a></td></tr>
 			 <tr><td>Id Module  </td><td> : ${ModuleModel.idModule}</td></tr>
@@ -51,12 +54,11 @@
 			 <tr><td>Code  </td><td> : ${ModuleModel.code}</td></tr>
 			</table>
 		</div>
-		<button id="modify"  type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modiferModal" data-bs-whatever="@mdo">Modifier</button>
 		
-		<br/><br/>
+		<hr class="line1">		
 		
 		<h3>Ajout d'une Matiere</h3>
-		<br/>
+		
 		<f:form class="row g-3" method="POST" action="${pageContext.request.contextPath}/cadre/matiere/add" modelAttribute="Matiere_Model">
 			  
 			  <div class="col-md-4">
@@ -81,12 +83,12 @@
 			    <button class="btn btn-primary" type="submit">Ajouter</button>
 			  </div>
 			</f:form>
-		<br/>
+		
+		<hr class="dotedline">
 		
 		<div>
 			<h3>Liste des Matieres</h3>
 		</div>
-
 		<div>
 
 			<table class="table">
@@ -109,7 +111,7 @@
 						<td>
 							<ul>
 								<li><a href="${pageContext.request.contextPath}/cadre/matiere/get/${m.idMatiere}">Plus d'information</a></li>
-								<li data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="GetId(id)" id="${m.idMatiere}"><a href="#">Supprimer</a></li>
+								<li data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="GetId(id,`matiere`)" id="${m.idMatiere}"><a href="#">Supprimer</a></li>
 							</ul>
 						</td>
 
@@ -182,7 +184,7 @@
 
 <input id="checkModal" value="${checkModal}"  hidden="true"/>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
-<script path="<%=path%>" classe="matiere" src="<c:url value="/resources/theme1/js/file1.js" />"></script>
+<script path="<%=path%>" src="<c:url value="/resources/theme1/js/file1.js" />"></script>
 
 </body>
 </html>

@@ -44,9 +44,26 @@
 		<br/>
 
 		<div>
-			<h3>Liste des Niveaux</h3>
+			<h3>Liste des Niveaux</h3> 
 		</div>
-
+		
+		<div class="row g-3 align-items-center">
+		  <div class="col-auto">
+		    <label for="SearchSelect" class="col-form-label">Recherche par</label>
+		  </div>
+		  <div class="col-auto">
+				<select class="form-select form-select-sm" onchange="getSearchValue()" id="SearchSelect" >
+					<option  value="idNiveau" >Id Niveau</option>
+					<option  value="alias">Alias</option>
+					<option  value="titre">Titre du niveau</option>
+				</select> 
+		  </div>
+		  <div class="col-auto"> : </div>
+		  <div class="col-auto">
+		  		 <input type="text" id="SearchInput" onchange="getSearchValue()" class="form-control form-control-sm" />
+		  </div>
+		</div>
+		
 		<div>
 
 			<table class="table">
@@ -70,7 +87,7 @@
 						<td>
 							<ul>
 								<li><a  href="${pageContext.request.contextPath}/cadre/niveau/get/${n.idNiveau}">Plus d'information</a></li>
-								<li data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="GetId(id)" id="${n.idNiveau}"><a href="#">Supprimer</a></li>
+								<li data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="GetId(id,`niveau`)" id="${n.idNiveau}"><a href="#">Supprimer</a></li>
 
 							</ul>
 						</td>
@@ -104,7 +121,7 @@
 	</div>
 	
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
-<script path="<%=path%>" classe="niveau" src="<c:url value="/resources/theme1/js/file1.js" />"></script>
+<script path="<%=path%>" src="<c:url value="/resources/theme1/js/file1.js" />"></script>
 
 </body>
 </html>

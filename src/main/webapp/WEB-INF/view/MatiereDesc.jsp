@@ -18,6 +18,8 @@
 	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" 
 	crossorigin="anonymous"/>
 
+<link type="text/css" rel="stylesheet" href="<c:url value="/resources/theme1/css/style.css" />" />
+
 </head>
 <body>
 
@@ -41,13 +43,18 @@
 		
 		<br/>
 		<div>
-			<h3>La Matiere</h3>
-			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modiferModal" data-bs-whatever="@mdo">Modifier</button>
+			<h3>
+				La Matiere
+				<button id="modify"  type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modiferModal" data-bs-whatever="@mdo">Modifier</button>
 			
-			<br/>Id Module: <a href="${pageContext.request.contextPath}/cadre/module/get/${MatiereModel.module.idModule}">${MatiereModel.module.idModule}</a>
-			<br/>Id Matiere: ${MatiereModel.idMatiere}
-			<br/>Nom : ${MatiereModel.nom}
-			<br/>Code : ${MatiereModel.code}
+			</h3>
+			<table>
+			 <tr><td>Id Module  </td><td> : <a href="${pageContext.request.contextPath}/cadre/module/get/${MatiereModel.module.idModule}">${MatiereModel.module.idModule}</a></td></tr>
+			 <tr><td>Id Matiere  </td><td> : ${MatiereModel.idMatiere}</td></tr>
+			 <tr><td>Nom   </td><td> : ${MatiereModel.nom}</td></tr>
+			 <tr><td>Code  </td><td> : ${MatiereModel.code}</td></tr>
+			</table>
+			
 		</div>
 		
 		<br/>
@@ -63,7 +70,7 @@
 	        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
-	        <f:form class="row g-3" method="POST" action="${pageContext.request.contextPath}/cadre/matiere/update" modelAttribute="MatiereModel">
+	        <f:form class="row g-3" method="POST" action="${pageContext.request.contextPath}/cadre/matiere/update" modelAttribute="UpdateMatiereModel">
 	      
 	      	   <div class="modal-body">
 			  
@@ -95,7 +102,9 @@
 	  </div>
 	</div>
 	
+<input id="checkModal" value="${checkModal}"  hidden="true"/>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
+<script path="<%=path%>"  src="<c:url value="/resources/theme1/js/file1.js" />"></script>
 	
 </body>
 

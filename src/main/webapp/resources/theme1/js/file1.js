@@ -6,6 +6,7 @@
 	const pathname = window.location.pathname;
 	var NameClassetoDelete = "";
 
+	//listener on delete on modal
 	try{
 		let confirm = document.querySelector("#supprimer")
 		confirm.addEventListener('click',()=>{
@@ -23,8 +24,8 @@
 	}
 	
 	
+	//verify checkModal to display Modal
 	try {
-
 		var check = document.getElementById("checkModal").value;
 		var modify = document.querySelector("#modify");
 		if (check==1)
@@ -33,15 +34,19 @@
 			modify.click()
 		}else{
 			document.getElementById("modiferModal").className = "modal fade";
-	
 		}
 	} catch (error) {}
 	
 
 
-	///get Search param
+	//manage Search
 	if (pathname.includes("list"))
 	{
+		//get class name
+		
+		NameClassetoDelete = pathname.split("/")[3];
+
+		///get Search param
 		const queryString = window.location.search;
 		const urlParams = new URLSearchParams(queryString);
 		const SearchParam = urlParams.get('search')
@@ -84,7 +89,17 @@
 		help = SearchValue;
 
 		if (RedirectUrl != "") location.replace(RedirectUrl);
-
 	}
+	
+	//verify AddFileState tp display modal
+	try{
+		var checkstate = document.getElementById("filestate").value;
+		
+		if (checkstate!="")
+		{
+			var show = document.querySelector("#modaltrigger");
+			show.click()
+		}
+	}catch(error){}
 	
 	

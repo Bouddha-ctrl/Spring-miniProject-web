@@ -1,0 +1,51 @@
+
+	[
+		{
+		"titreFiliere" : "genie informatique",
+		"codeFiliere"  : "111",
+		"anneeaccreditation" : 2012,
+		"anneeFinaccreditation" : 2018,
+		
+		"niveaux"      : [
+				{
+				  "alias":"gi-1",
+			 	  "titre":"premiere année, genie informatique",
+				  "modules" :[
+					     {
+      					      "titre" : "Modélisation",
+      					      "code" : "12",
+                                              "matieres" : [
+                                                           {
+                                                           "nom": "UML",
+                                                           "code": "45"
+                                                           },
+                                                           {
+                                                           "nom": "Merise",
+                                                           "code": "101"
+                                                           }
+                                                           ]
+
+					     },
+					     {
+      					      "titre" : "gestion de projet",
+      					      "code" : "15"
+					     }
+					    ]
+				},
+				{
+				  "alias":"gi-2",
+			 	  "titre":"deuxieme année, genie informatique"
+				}
+				]
+		},
+                {
+                "titreFiliere" : "genie civil",
+		"codeFiliere"  : "145",
+		"anneeaccreditation" : 2018,
+		"anneeFinaccreditation" : 2025
+                }
+
+	]
+	
+
+		

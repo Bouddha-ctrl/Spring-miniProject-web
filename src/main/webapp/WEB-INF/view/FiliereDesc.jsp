@@ -159,7 +159,11 @@
 				  </div>
 				  <div class="col-md-4">
 				    <label  class="form-label">Id Enseignant</label>
-				    <f:input type="text" name="idenseignant" class="form-control" path="idenseignant" />
+				    <f:select class="form-select" path="idenseignant" >
+				   	 	<c:forEach items="${ListEnseignant}" var="e">
+				    		<f:option value="${e.idUtilisateur}" />
+				    	</c:forEach>
+				    </f:select>
 				  </div>
 				  <div class="col-md-4">
 				    <label  class="form-label">Date Debut</label>

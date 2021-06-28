@@ -15,11 +15,8 @@
 			<artifactId>mini-projet</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		<dependency>
-		     <groupId>com.fasterxml.jackson.dataformat</groupId>
-		     <artifactId>jackson-dataformat-xml</artifactId>
-		     <version>2.9.7</version>
-		</dependency>
+		
+		
 		<dependency>
 		    <groupId>commons-fileupload</groupId>
 		    <artifactId>commons-fileupload</artifactId>
@@ -30,7 +27,11 @@
 		    <artifactId>commons-io</artifactId>
 		    <version>2.4</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20140107</version>
+		</dependency>
 		
 	</dependencies>
 	

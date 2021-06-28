@@ -40,9 +40,7 @@
 		  <li class="nav-item">
 		    <a class="nav-link" href="${pageContext.request.contextPath}/cadre/matiere/list">Matiere</a>
 		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" href="${pageContext.request.contextPath}/cadre/pedagogie/tree">Tree</a>
-		  </li>
+		  
 		</ul>
 
 
@@ -84,7 +82,27 @@
 			  </div>
 			</f:form>
 
-		<br/>
+		<hr class="dottedline" />
+		
+		<h3>Ajout par fichier JSON</h3>
+		
+		<div class="row g-3 align-items-center">
+			<form class="row g-3" enctype="multipart/form-data" method="POST" action="${pageContext.request.contextPath}/cadre/filiere/addFile">
+		
+			  <div class="col-auto">
+			    <label for="SearchSelect" class="col-form-label">Fichier : </label>
+			  </div>
+		  
+			  <div class="col-auto">
+			  		 <input type="file" id="fileJson" name="fileJson" class="form-control form-control-sm" required/>
+			  </div>
+			  <div class="col-auto">
+			  		 <button class="btn btn-primary" type="submit">Ajouter</button>
+			  </div>
+		  </form>
+		</div>
+		<hr class="line1" />
+		
 		<div>
 			<h3>Liste des filieres</h3>
 		</div>
@@ -149,7 +167,7 @@
 	</div>
 		
 
-	<!-- Modal -->
+	<!-- Modal : Suppression Verification-->
 	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
@@ -158,7 +176,7 @@
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
-	        La supression de cet element supprimera tous son contenu
+	        La supression de ce element supprimera tous son contenu.
 	      </div>
 	      <div class="modal-footer">
 	        <button id="annuler" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
@@ -168,6 +186,29 @@
 	  </div>
 	</div>
 	
+	
+	<!-- Button trigger Jsonfile state Modal -->
+	<button type="button" id="modaltrigger" data-bs-toggle="modal" data-bs-target="#staticBackdrop" hidden="true"></button>
+
+		<!-- Modal : JSonFile State -->
+		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="staticBackdropLabel">Alert</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		        ${AddFileState}
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Understood</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+<input id="filestate" value="${AddFileState}" hidden="true"/>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
 <script path="<%=path%>"  src="<c:url value="/resources/theme1/js/file1.js" />"></script>
 

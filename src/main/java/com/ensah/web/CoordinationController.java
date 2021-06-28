@@ -19,6 +19,7 @@ import com.ensah.core.metier.Module;
 import com.ensah.core.metier.Niveau;
 import com.ensah.core.model.CoordinationModel;
 import com.ensah.core.service.Interface.ICoordinationService;
+import com.ensah.core.service.Interface.IEnseignantService;
 import com.ensah.core.service.Interface.IFiliereService;
 
 @Controller
@@ -30,6 +31,9 @@ public class CoordinationController {
 	
 	@Autowired
 	private IFiliereService Filiere_services;
+	
+	@Autowired
+	private IEnseignantService Enseignant_services;
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addFiliere(@Valid @ModelAttribute("Coordination_Model") CoordinationModel coord, 
@@ -48,6 +52,8 @@ public class CoordinationController {
 			model.addAttribute("FiliereModel",f);   //info Filiere
 			model.addAttribute("checkModal",0); //show update model or not   1/0
 			model.addAttribute("UpdateFiliereModel",f); //info Filiere to update
+			model.addAttribute("ListEnseignant",Enseignant_services.getAllEnseignant());
+
 
 			return "FiliereDesc";
 		}

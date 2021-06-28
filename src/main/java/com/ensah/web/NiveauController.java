@@ -19,6 +19,7 @@ import com.ensah.core.metier.Filiere;
 
 import com.ensah.core.metier.Niveau;
 import com.ensah.core.model.CoordinationModel;
+import com.ensah.core.service.Interface.IEnseignantService;
 import com.ensah.core.service.Interface.IFiliereService;
 import com.ensah.core.service.Interface.INiveauService;
 
@@ -32,6 +33,9 @@ public class NiveauController {
 	
 	@Autowired
 	private IFiliereService Filiere_services;
+	
+	@Autowired
+	private IEnseignantService Enseignant_services;
 	
 	@RequestMapping(value="/list")
 	public String NiveauList(@RequestParam(required = false,name="search") String searchParam, Model model) {
@@ -62,6 +66,8 @@ public class NiveauController {
 			model.addAttribute("FiliereModel",f);   //info Filiere
 			model.addAttribute("checkModal",0); //show update model or not   1/0
 			model.addAttribute("UpdateFiliereModel",f); //info Filiere to update
+			model.addAttribute("ListEnseignant",Enseignant_services.getAllEnseignant());
+
 			return "FiliereDesc";
 		}
 		
